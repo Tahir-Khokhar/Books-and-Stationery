@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}{% if category %}Edit Category{% else %}Create Category{% endif %}{% endblock %}
+{% block content %}
+<h3 class="mb-3">{% if category %}Edit Category{% else %}Create Category{% endif %}</h3>
+
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label class="form-label">Category Name</label>
+    <input class="form-control" name="name" required value="{{ category.name|default:'' }}">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <textarea class="form-control" name="description" rows="3">{{ category.description|default:'' }}</textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Save</button>
+  <a class="btn btn-outline-secondary" href="{% url 'category_list' %}">Cancel</a>
+</form>
+{% endblock %}
+
